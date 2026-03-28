@@ -25,7 +25,7 @@ function Login() {
         alert("Login successful");
         navigate("/seats");
       } else {
-        alert("data.message");
+        alert(data.message);
       }
     } catch (error) {
       console.log(error);
