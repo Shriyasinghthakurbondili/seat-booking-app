@@ -6,7 +6,8 @@ function Signup(){
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
 
-    async function handleSignup(){
+    async function handleSignup(e){
+        e.preventDefault();
         const res = await fetch("http://localhost:3000/api/users/signup",{
             method:"POST",
             headers:{
@@ -18,25 +19,27 @@ function Signup(){
 
         const data = await res.json();
         if(res.ok){
+            
             navigate("/seats")
         }else{
             alert(data.message)
         }
-        alert("Signup successfully")
         
 }
 
     return(
         <div className="auth-container">
-            <div className="auth-card"/>
+            <form className="auth-card" onSubmit={handleSignup}>
             <h2>Signup</h2>
-            <br></br>
+            
             <input placeholder="Email" onChange={(e)=>setEmail(e.target.value)} typeof="Email" />
             <input placeholder="Password" onChange={(e)=>setPassword(e.target.password)} />
            
-            <button onClick={handleSignup}>Signup</button>
+            <button type="submit">Signup</button>
     
             <p className="auth-link" onClick={()=>navigate("/login")}>Already have account ? Login</p>
+
+            </form>
         </div>
     )
 }
